@@ -1,15 +1,29 @@
 def menu():
-    print('SISTEMA DE GESTÃO DE PRODUTOS\n')
-    print('O que você quer fazer?')
+    print('='*5,'SISTEMA DE GESTÃO DE PRODUTOS','='*5)
+    print()
+    print('Seja bem vindo(a)!\n')
+    print('Operações desponiveis\n')      
+    print('O que você quer fazer?\n')
     print('A - Cadastrar produto')
-    print('B - Consultar produto\n')
-    opcao = input('Digite a opção a ser executada: ')
+    print('B - Consulta produto')
+    print('C - Consulta geral')
+    print('D - Alterar produto')
+    print('E - Deletar produto')
+    print('F - Informações do sistema')
+    print('G - sair do sistema')
+    
+
+    opcao = input('Digite a opção a ser executada:\n ')
 
     if opcao.lower() == 'a':
         cadastrar_produto()
         input('Digite qualquer tecla para continuar... ')
-    elif opcao == 'b':
-        print('Função a ser implementada...')
+    elif opcao.lower() == 'c':
+        consultar_produto()
+        input('Digite qualquer tecla para continuar... ')
+
+    elif opcao.lower()=='g':
+        sair()
     else:
         print('Opção inválida!')
         input('Digite qualquer tecla para continuar... ')
@@ -34,6 +48,21 @@ def cadastrar_produto():
   if input('Deseja cadastrar um novo produto? S/N: ').lower() == 's':
     cadastrar_produto()
 
+def consultar_produto():
+  banco = retornar_banco('ler')
+  produtos = banco.readlines()
+  banco.close()
+
+  
+  print('Todos produtos cadastrados')
+  for i in produtos:
+      print(i)
+      
+  
+  
+  
+  
+
 def retornar_banco(operacao):
   if operacao == 'adicionar':
     return open('banco.txt', 'a')
@@ -46,5 +75,15 @@ def retornar_banco(operacao):
       return open('banco.txt', 'r')
 
     
-while True:
+def sair():
+  global executar
+  print('Até a próxima!')
+
+  executar = False 
+
+
+executar = True    
+
+    
+while executar:
   menu()
